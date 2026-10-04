@@ -1,0 +1,8 @@
+{
+  "appId": "com.tagalogvsbisaya.snake",
+  "appName": "Tagalog vs Bisaya",
+  "webDir": "web",
+  "server": {
+    "androidScheme": "https"
+  }
+}
