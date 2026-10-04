@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#121218" />
+<title>Tagalog vs Bisaya — Snake</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" type="image/png" href="assets/icon.png" />
+<link rel="apple-touch-icon" href="assets/icon.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="game-root">
+  <canvas id="game"></canvas>
+
+  <div id="hud" class="hidden">
+    <span id="hud-player">Player</span>
+    <span id="hud-score">Score: 0</span>
+  </div>
+
+  <!-- MAIN MENU -->
+  <div id="menu" class="overlay">
+    <h1 class="title">SNAKE VERSUS</h1>
+    <button class="menu-btn" data-action="play">PLAY</button>
+    <button class="menu-btn" data-action="leaderboard">LEADERBOARD</button>
+    <button class="menu-btn" data-action="quit">EXIT</button>
+    <p class="hint">Swipe to move</p>
+  </div>
+
+  <!-- SNAKE SELECT -->
+  <div id="snake-select" class="overlay hidden">
+    <h2>CHOOSE YOUR SNAKE</h2>
+    <button class="menu-btn" data-snake="tagalog">TAGALOG</button>
+    <button class="menu-btn" data-snake="bisaya">BISAYA</button>
+    <button class="menu-btn" data-action="back">BACK</button>
+  </div>
+
+  <!-- NAME ENTRY -->
+  <div id="name-screen" class="overlay hidden">
+    <h2>ENTER YOUR NAME</h2>
+    <input id="name-input" maxlength="12" placeholder="Player" autocomplete="off" />
+    <button class="menu-btn" id="name-ok">START</button>
+    <button class="menu-btn" data-action="back-to-snake">BACK</button>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div id="leaderboard" class="overlay hidden">
+    <h2>LEADERBOARD</h2>
+    <ol id="scores-list"></ol>
+    <button class="menu-btn" data-action="back">BACK</button>
+  </div>
+
+  <!-- GAME OVER -->
+  <div id="game-over" class="overlay hidden">
+    <h2 class="danger">GAME OVER</h2>
+    <p id="final-score"></p>
+    <button class="menu-btn" data-action="menu">MENU</button>
+    <button class="menu-btn" data-action="play">PLAY AGAIN</button>
+  </div>
+
+</div>
+<script src="game.js"></script>
+</body>
+</html>
