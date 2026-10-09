@@ -15,6 +15,15 @@ RECOGNISED FILES (all optional)
   corner.png   A 90-degree bend in the body path.
   tail.png     The tail segment, drawn facing LEFT.
 
+  ANIMATED (Aseprite) — optional frame sequences, auto-detected:
+    head_0.png, head_1.png, head_2.png, …
+    body_0.png, body_1.png, …
+    corner_0.png, corner_1.png, …
+    tail_0.png, tail_1.png, …
+  If `<part>.png` AND `<part>_N.png` both exist, they play in order
+  (base first, then _0, _1, …) at 8 fps. If only `<part>_N.png` exist,
+  those play alone. Static single-file art keeps working unchanged.
+
 If an image is missing, that part of the snake falls back to the default
 colored rectangle, so the game always runs.
 
@@ -22,11 +31,36 @@ IMAGE REQUIREMENTS
 -------------------
 - Format: PNG (or any pygame-supported format). Use transparency (.png) so the
   board shows behind the snake.
-- File name must match exactly (head.png, body.png, corner.png, tail.png).
-- Each image is scaled automatically to one board cell (20x20 by default), so
-  you can author at any size. Logos / details will be scaled down.
-- The whole snake is exactly one cell thick. Your artwork must fit within the
-  cell so segments line up into a continuous snake.
+- File name must match exactly (head.png, body.png, corner.png, tail.png,
+  or head_0.png … tail_7.png for animations).
+- Each image is scaled automatically to cover one board cell (40x40 at 1080p),
+  so you can author at any size. Recommended Aseprite canvas: 128x128 or 64x64
+  per frame, transparent background.
+- Each part is stretched to fill its cell so neighbouring segments meet with no
+  seam. Keep the artwork within about a 3:1 aspect ratio; anything more
+  elongated than that is letterboxed (centred, aspect kept) instead.
+- The whole snake is exactly one cell thick. Your artwork must fill the cell so
+  segments line up into a continuous snake: the segments that join have to
+  reach the edges they connect on, otherwise a transparent gap shows at the
+  joint. In particular the head must reach its back edge and the elbow arms
+  must reach the two edges they join.
+- body.png and tail.png are turned a quarter turn on load if they are taller
+  than they are wide, so their long axis always runs along the direction of
+  travel. Author them any way you like.
+
+ASEPRITE EXPORT (snake)
+-----------------------
+1. Draw facing RIGHT (head mouth/eyes → right, body horizontal L→R edge,
+   corner L-edge in → BOTTOM-edge out, tail → left).
+2. Animate with tags/frames on one timeline, then:
+   File > Export Sprite Sheet:
+     - Type: PNG, Trim/Crop: off (keep full canvas so frames align)
+     - Output: separate frames as <part>_0.png, <part>_1.png, …
+3. Drop the PNGs into assets/p1/ (green Tagalog) and/or assets/p2/
+   (blue Bisaya). No code change needed — the game picks them up and
+   loops them at 8 fps (desktop + PWA).
+4. Keep the sway in mind: the game adds a ±14%-cell slither offset on top
+   of your frames, so author segments that tile edge-to-edge.
 
 AUTHORING GUIDES
 -----------------
@@ -42,7 +76,9 @@ BODY (body.png)
 
 CORNER (corner.png)
   Draw a 90-degree bend where the body enters the image from the LEFT edge and
-  exits through the BOTTOM edge. The game rotates it to match every turn.
+  exits through the BOTTOM edge. The game rotates it for every direction of
+  travel and mirrors it for the other hand, so this single elbow covers both
+  right and left turns. Both arms must reach the edges they leave through.
 
 TAIL (tail.png)
   Draw the tail pointing to the LEFT, connected from the RIGHT edge. The game
@@ -52,10 +88,12 @@ HOW IT WORKS (for reference)
 ----------------------------
 The game stores the snake as a list of grid cells. Each frame it:
 
-  1. Draws the tail image rotated to point away from the body.
-  2. Draws each middle segment: a body image for straight stretches, a corner
+  1. Works out a slither offset per segment (head locked, ramping towards the
+     tail) that bends smoothly instead of snapping apart at a corner.
+  2. Draws the tail image rotated to point away from the body.
+  3. Draws each middle segment: a body image for straight stretches, a corner
      image for turns.
-  3. Draws the head on top, rotated to face the direction of travel.
+  4. Draws the head on top, rotated to face the direction of travel.
 
 Because every part is optional, you can start with just `head.png` and keep the
 rest as the default rectangles, then add `body.png`, `corner.png` and
@@ -79,10 +117,11 @@ these are optional; when missing, the game keeps its normal code-drawn look.
       A file named menu.png (optional) is only used for the main menu screen.
 
   assets/food/   (a FOLDER)
-      Put any PNG here to change what the snake eats. The first image
-      (alphabetically) is used and scaled to fill one board cell. A default
-      apple (apple.png) is included - replace it or add your own. Use a
-      transparent background (.png) so the board shows through. A legacy
+      Put any PNG here to change what the snake eats. ALL PNGs in the folder
+      now play as an animation in alphabetical order at 6 fps
+      (single PNG = static, food_0.png + food_1.png + … = animated).
+      Frames are scaled to fill one board cell. Aseprite: export frames as
+      food_0.png, food_1.png, … with transparent background. A legacy
       assets/food.png file is also honoured if the folder is empty.
 
   assets/menu/logo.png
