@@ -1,0 +1,17 @@
+{
+  "name": "tagalog-vs-bisaya-snake",
+  "version": "1.0.0",
+  "description": "Tagalog vs Bisaya snake game - PWA wrapped with Capacitor",
+  "scripts": {
+    "start": "py -3.13 -m http.server 8000 --directory web",
+    "cap:sync": "npx cap sync",
+    "cap:android": "npx cap open android",
+    "cap:ios": "npx cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.0.0"
+  }
+}
