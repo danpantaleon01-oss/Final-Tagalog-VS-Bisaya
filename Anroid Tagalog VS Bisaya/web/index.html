@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#0c0d14" />
+<meta name="description" content="Tagalog vs Bisaya — Snake. Pick your snake, chase the food, top the leaderboard." />
+<title>Tagalog vs Bisaya — Snake</title>
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" type="image/png" href="assets/icon.png" />
+<link rel="apple-touch-icon" href="assets/icon.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="game-root">
+  <canvas id="game"></canvas>
+
+  <div id="hud" class="hidden">
+    <span id="hud-player">Player</span>
+    <span id="hud-score">Score: 0</span>
+  </div>
+
+  <!-- MAIN MENU -->
+  <div id="menu" class="overlay">
+    <div class="eyebrow">Midterms Edition</div>
+    <h1 class="title">SNAKE<br />VERSUS</h1>
+    <div class="vs-badge"><span class="t">TAGALOG</span><span class="vs">VS</span><span class="b">BISAYA</span></div>
+    <button class="menu-btn primary" data-action="play">▶ &nbsp;PLAY</button>
+    <button class="menu-btn" data-action="leaderboard">🏆 &nbsp;LEADERBOARD</button>
+    <button class="menu-btn ghost" data-action="quit">EXIT</button>
+    <p class="hint">Swipe to move &nbsp;•&nbsp; <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> / WASD on desktop</p>
+  </div>
+
+  <!-- SNAKE SELECT -->
+  <div id="snake-select" class="overlay hidden">
+    <div class="eyebrow">Step 1 / 2</div>
+    <h2>CHOOSE YOUR SNAKE</h2>
+    <button class="menu-btn" data-snake="tagalog">🟢 &nbsp;TAGALOG</button>
+    <button class="menu-btn" data-snake="bisaya">🔵 &nbsp;BISAYA</button>
+    <button class="menu-btn ghost" data-action="back">← BACK</button>
+  </div>
+
+  <!-- NAME ENTRY -->
+  <div id="name-screen" class="overlay hidden">
+    <div class="eyebrow">Step 2 / 2</div>
+    <h2>ENTER YOUR NAME</h2>
+    <input id="name-input" maxlength="12" placeholder="Player" autocomplete="off" enterkeyhint="go" />
+    <button class="menu-btn primary" id="name-ok">START GAME</button>
+    <button class="menu-btn ghost" data-action="back-to-snake">← BACK</button>
+    <p class="hint">Max 12 characters — shown on the leaderboard</p>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div id="leaderboard" class="overlay hidden">
+    <div class="eyebrow">Top 10 • This device</div>
+    <h2>LEADERBOARD</h2>
+    <ol id="scores-list"></ol>
+    <button class="menu-btn" data-action="back">← BACK</button>
+  </div>
+
+  <!-- GAME OVER -->
+  <div id="game-over" class="overlay hidden">
+    <h2 class="danger">GAME OVER</h2>
+    <p id="final-score">Score: 0</p>
+    <button class="menu-btn primary" data-action="play">↻ &nbsp;PLAY AGAIN</button>
+    <button class="menu-btn ghost" data-action="menu">MAIN MENU</button>
+  </div>
+
+</div>
+<script src="game.js"></script>
+</body>
+</html>
