@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#0c0d14" />
+<meta name="description" content="Install Tagalog vs Bisaya on your iPhone or iPad." />
+
+<!-- iPhone/iPad "download": this page is itself the installable web app.
+     Add to Home Screen from here -> the game icon lands on the Home
+     Screen and opens fullscreen from then on. -->
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Tagalog vs Bisaya" />
+<meta name="format-detection" content="telephone=no" />
+
+<title>Tagalog vs Bisaya — Install for iPhone / iPad</title>
+<link rel="manifest" href="site-manifest.json" />
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="167x167" href="assets/apple-touch-icon-167.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="assets/apple-touch-icon-152.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="assets/apple-touch-icon-120.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="wrap page">
+
+  <header class="brand">
+    <img src="assets/icon-192.png" alt="Game icon" />
+    <div><h1>SNAKE<br />VERSUS</h1></div>
+  </header>
+  <div class="vs-badge"><span class="t">TAGALOG</span><span class="vs">VS</span><span class="b">BISAYA</span></div>
+
+  <div class="app-card">
+    <img src="assets/icon-1024.png" alt="Tagalog vs Bisaya icon" />
+    <div class="info">
+      <h2>Tagalog vs Bisaya</h2>
+      <p>Tagalog snake 🆚 Bisaya snake — single-player, swipe to steer, voiced
+      in Tagalog &amp; Bisaya. Leaderboard saved on your device.</p>
+      <div class="badges">
+        <span class="badge">Free</span>
+        <span class="badge">No account needed</span>
+        <span class="badge">Works offline</span>
+        <span class="badge">iOS 15+ · iPadOS 15+</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="button" id="install-btn">📲 &nbsp;INSTALL ON HOME SCREEN</button>
+  <p class="dl-sub" id="install-sub">Tap install → the Apple share sheet opens → pick <b>Add to Home Screen</b>.</p>
+
+  <div class="note blue" id="not-ios-note" style="display:none">
+    <b>You're not on an iPhone/iPad.</b> Open this exact link in <b>Safari</b> on your
+    iPhone or iPad to install — iOS restricts this install to Apple's own browser.
+  </div>
+
+  <section class="steps">
+    <h3>What happens after you tap install</h3>
+    <ol>
+      <li><span class="num">1</span><span>The <b>Apple share sheet</b> slides up
+      (⤴️). Don't see it? Tap the <b>Share</b> icon in Safari's toolbar instead.</span></li>
+      <li><span class="num">2</span><span>Scroll down and tap <b>Add to Home Screen</b> ＋
+      (choose Safari's <b>⎋ Share ↪ aA ⌗</b> row, then it's at the bottom of the list).</span></li>
+      <li><span class="num">3</span><span>Tap <b>Add</b> — the game icon appears on your
+      Home Screen. Open it from there and it runs fullscreen, with sound, offline.</span></li>
+    </ol>
+  </section>
+
+  <div class="note">
+    <b>Uses Safari — not Chrome.</b> Apple only allows apps to be added to the
+    Home Screen from Safari's share sheet. If the button didn't do anything,
+    you're probably inside another browser app (e.g. opened from a chat app) —
+    tap <b>⋯ / Open in Safari</b> first.
+  </div>
+  <div class="note green">
+    <b>Already installed?</b> This page detects it and jumps straight into the game.
+    Open the <b>Tagalog vs Bisaya</b> icon on your Home Screen instead of this browser tab.
+  </div>
+
+  <a class="back" href="index.html">← Back to all downloads</a>
+  <p class="footer">No downloads folder, no antivirus nag, no account —<br />
+  the iPhone way: <b>share → add → play</b>. And a real App&nbsp;Store/TestFlight
+  build can replace this page's link in one edit (see <b>IOS-SETUP.md</b>).</p>
+
+</div>
+
+<!-- The share sheet doesn't pop without context for first-timers, so the
+     install click first shows what will happen, then triggers it. -->
+<div id="install-sheet-banner">
+  <div id="sheet-emoji">⤴️</div>
+  <h2>Adding the game now…</h2>
+  <div class="share-hero">Tap <b>“Add to Home Screen”</b> in the sheet</div>
+  <p>If no sheet opened, the button below will try again — or tap Apple's
+  <b>Share</b> icon (⤴️) at the very bottom-center of Safari.</p>
+  <button id="sheet-cancel">Cancel</button>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var isIOS = /iP(hone|od|ad)/.test(navigator.userAgent) ||
+              (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var standalone =
+    window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone === true;
+
+  // Installed already? The Home Screen icon opens THIS page fullscreen ->
+  // jump straight into the actual game.
+  if (standalone) {
+    location.replace("./game/");
+    return;
+  }
+
+  var btn = document.getElementById("install-btn");
+  var sub = document.getElementById("install-sub");
+  var banner = document.getElementById("install-sheet-banner");
+  var note = document.getElementById("not-ios-note");
+
+  if (!isIOS) {
+    note.style.display = "block";
+    btn.disabled = true;
+    btn.style.opacity = "0.5";
+    btn.style.cursor = "not-allowed";
+    btn.textContent = "📱 &nbsp;INSTALL ON HOME SCREEN (open on iPhone)";
+    sub.textContent = "This page is for iPhone/iPad — visit it in Safari on your device.";
+    btn.addEventListener("click", function () { return; });
+    return;
+  }
+
+  function triggerShare() {
+    if (navigator.share && navigator.canShare) {
+      navigator.share({
+        title: "Tagalog vs Bisaya",
+        text: "Install Tagalog vs Bisaya — Snake",
+        url: location.href
+      }).then(function () {
+        // sheet action completed (Add / Copy / Bookmark) — coaching done
+        banner.classList.remove("show");
+      }).catch(function () { /* dismissed: steps above keep guiding */ });
+    }
+  }
+
+  btn.addEventListener("click", function () {
+    banner.classList.add("show");
+    triggerShare();
+  });
+  document.getElementById("sheet-cancel").addEventListener("click", function () {
+    banner.classList.remove("show");
+  });
+})();
+</script>
+<script>
+  // Root service worker: caches the whole site (hub pages + game), so the
+  // FIRST launch from a home-screen / desktop icon already works offline.
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js", { scope: "/" }).catch(function () {});
+  }
+</script>
+</body>
+</html>

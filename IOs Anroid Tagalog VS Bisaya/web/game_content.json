@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+
+  "speed": {
+    "startFps": 12,
+    "capFps": 25,
+    "rampScorePerStep": 50
+  },
+
+  "animation": {
+    "snakeFps": 8,
+    "foodFps": 6,
+    "snakeFrameCap": 16
+  },
+
+  "part": {
+    "fillRatio": 3.0
+  },
+
+  "sway": {
+    "amount": 0.14,
+    "blendAt": 0.45
+  },
+
+  "popup": {
+    "words": ["SARAP!", "LAMI!", "YUMMY!", "NOM NOM!", "TAMIS!", "LAMON!", "+10", "SHEESH!"],
+    "colors": ["#ffd246", "#3fe07f", "#ffffff", "#ff9d9d", "#a8d4ff"],
+    "lifeMs": 950
+  },
+
+  "voices": {
+    "tagalog": {
+      "blip": "tagalog_eat",
+      "blipPhrase": "HALIMAW SA SARAP!",
+      "lines": [
+        { "file": "tag-arman", "phrase": "WOW ANSARAP!" },
+        { "file": "tag-babalu", "phrase": "WOW NAMAN!" },
+        { "file": "tag-nenegb", "phrase": "MA ANO ULAM?!" },
+        { "file": "tag-tamis-malupiton", "phrase": "ANG TAMIS!" }
+      ]
+    },
+    "bisaya": {
+      "blip": "bisaya_eat",
+      "blipPhrase": "WALANG KANIN?!",
+      "lines": [
+        { "file": "bis-lami", "phrase": "LAMI!" },
+        { "file": "bis-sulit", "phrase": "SULIT!" },
+        { "file": "bis-unlirice", "phrase": "UNLIRICE!" },
+        { "file": "bis-yummy", "phrase": "YUMMY!" }
+      ]
+    }
+  },
+
+  "food": {
+    "dir": "assets/food",
+    "discovery": "scan",
+    "known": ["785058659_1053053574250803_8373239390610118887_n.png", "food.png"],
+    "probeCount": 16
+  },
+
+  "palette": {
+    "bgTop": "#1a1e35",
+    "bgMid": "#16182a",
+    "bgDeep": "#0c0d14",
+    "green": "#3fe07f",
+    "blue": "#5aa8ff",
+    "gold": "#ffd246",
+    "red": "#ff5d5d",
+    "white": "#f2f3fa"
+  }
+}

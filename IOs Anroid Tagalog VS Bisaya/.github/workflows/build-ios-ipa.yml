@@ -1,0 +1,50 @@
+name: build-ios-ipa
+
+# Builds the native iOS app (flutter_app) on a cloud macOS runner and
+# publishes an UNSIGNED .ipa artifact. No Apple Developer account needed to
+# produce it — the free Windows tool Sideloadly re-signs this file with any
+# personal Apple ID over USB (see IOS-REAL-APP-PATH.md).
+
+on:
+  workflow_dispatch: {}        # allow manual "Run workflow" button
+  push:
+    branches: [ main, master ]
+    paths:
+      - "flutter_app/**"
+      - ".github/workflows/build-ios-ipa.yml"
+
+jobs:
+  ipa:
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter (must match the local version the ios/ template was generated with)
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.47.6"
+          channel: stable
+
+      - name: flutter pub get
+        working-directory: flutter_app
+        run: flutter pub get
+
+      - name: flutter build ios (release, no codesign)
+        working-directory: flutter_app
+        run: flutter build ios --release --no-codesign
+
+      - name: Package unsigned .ipa (Payload/Runner.app)
+        working-directory: flutter_app
+        run: |
+          mkdir -p build/ipa/Payload
+          cp -R build/ios/iphoneos/Runner.app build/ipa/Payload/Runner.app
+          cd build/ipa
+          zip -qry ../../Tagalog-vs-Bisaya-unsigned.ipa Payload
+
+      - name: Upload .ipa artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Tagalog-vs-Bisaya-unsigned-ipa
+          path: flutter_app/Tagalog-vs-Bisaya-unsigned.ipa
+          if-no-files-found: error

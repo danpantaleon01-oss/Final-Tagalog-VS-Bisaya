@@ -1,0 +1,34 @@
+# ── Build outputs (portable build lives in dist/; PyInstaller work in build/) ──
+build/
+dist/
+Tagalog-Vs-Bisaya-PWA.zip
+*.spec
+
+# ── Project-local virtualenv for the portable build ──
+.venv/
+
+# ── Python runtime cruft ──
+__pycache__/
+*.pyc
+
+# ── Per-user runtime state (score/prefs are written next to the EXE/CWD) ──
+scores.json
+prefs.json
+
+# ── Flutter build state (flutter_app/.gitignore covers most of this too) ──
+.dart_tool/
+.gradle/
+.flutter-plugins-dependencies
+local.properties
+key.properties
+*.iml
+
+# ── Download-hub hosted binaries (already distributed, not source) ──
+site/downloads/
+
+# ── Session-generated evidence, screenshots, temp data ──
+_user_data/
+
+# ── OS cruft ──
+Thumbs.db
+.DS_Store

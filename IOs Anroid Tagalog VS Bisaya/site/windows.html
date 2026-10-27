@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0c0d14" />
+<meta name="description" content="Download Tagalog vs Bisaya — Snake for Windows (.exe)." />
+<title>Tagalog vs Bisaya — Download for Windows</title>
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="wrap page">
+
+  <header class="brand">
+    <img src="assets/icon-192.png" alt="Game icon" />
+    <div><h1>SNAKE<br />VERSUS</h1></div>
+  </header>
+  <div class="vs-badge"><span class="t">TAGALOG</span><span class="vs">VS</span><span class="b">BISAYA</span></div>
+
+  <div class="app-card">
+    <img src="assets/icon-1024.png" alt="Tagalog vs Bisaya icon" />
+    <div class="info">
+      <h2>Tagalog vs Bisaya</h2>
+      <p>Tagalog snake 🆚 Bisaya snake — single-player, arrow keys / WASD to steer,
+      voiced in Tagalog &amp; Bisaya. Leaderboard saved on your PC.</p>
+      <div class="badges">
+        <span class="badge">Free</span>
+        <span class="badge">18 MB</span>
+        <span class="badge">Windows 10 / 11</span>
+        <span class="badge">.exe · v1.0.0</span>
+      </div>
+    </div>
+  </div>
+
+  <a class="dl-btn" href="downloads/Tagalog-VS-Bisaya-PC.exe" download>⬇️ &nbsp;DOWNLOAD .EXE (18 MB)</a>
+  <p class="dl-sub">Single portable file — run it, play. Nothing else gets installed.</p>
+
+  <section class="steps">
+    <h3>First run</h3>
+    <ol>
+      <li><span class="num">1</span><span>Run the downloaded <b>Tagalog-VS-Bisaya-PC.exe</b>.</span></li>
+      <li><span class="num">2</span><span>Windows SmartScreen says "unknown publisher" —
+      click <b>More info</b> → <b>Run anyway</b>. (Every self-made game shows this.)</span></li>
+      <li><span class="num">3</span><span>The game window opens — pick Tagalog or Bisaya
+      and chase the food 🍖.</span></li>
+    </ol>
+  </section>
+
+  <a class="back" href="index.html">← Back to all downloads</a>
+</div>
+<script>
+  // Root service worker: caches the whole site (hub pages + game), so the
+  // FIRST launch from a home-screen / desktop icon already works offline.
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js", { scope: "/" }).catch(function () {});
+  }
+</script>
+</body>
+</html>
